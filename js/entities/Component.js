@@ -28,11 +28,9 @@ class Component
 		}
 
 		this.gravity = 0;
-		this.gravitySpeed = 0;
 		if(gravityBool)
 		{
-			this.gravity = 0.05;
-			this.gravitySpeed = 0;
+			this.gravity = 0.2;
 		}
 
 		this.angle = angle;
@@ -50,9 +48,10 @@ class Component
 
 	move()
 	{
-		this.gravitySpeed += this.gravity;
+		this.speedY += this.gravity;
+
 		this.x += this.speedX;
-		this.y += this.speedY + this.gravitySpeed;
+		this.y += this.speedY;
 		this.determineTopLeftRighBottom();
 		if (this.type === "base")
 		{

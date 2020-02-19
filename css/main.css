@@ -4,8 +4,20 @@
     padding: 0;
 }
 
+#canvasContainer
+{
+    padding: 100px;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-areas:
+            "canvas";
+}
+
 canvas
 {
     border:1px solid #d3d3d3;
+    grid-area: canvas;
+    justify-self: center;
+    align-self: center
     /*background-color: #f1f1f1;*/
 }

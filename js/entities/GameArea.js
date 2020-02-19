@@ -181,7 +181,7 @@ class GameArea
 			let gap = (this.canvas.height - this.baseHeight)/3;
 
 			this.addComponent(new Component("green", "image", 52, height,
-				"./assets/sprites/pipe-green.png", this.canvas.width, 0, -1, 0, false, 90), true);
+				"./assets/sprites/pipe-green.png", this.canvas.width, 0, -1, 0, false, 0), true);
 
 			this.addComponent(new Component("green", "image", 52, this.canvas.height- this.baseHeight - height - gap,
 				"./assets/sprites/pipe-green.png", this.canvas.width, height + gap, -1, 0, false, 0), true);
