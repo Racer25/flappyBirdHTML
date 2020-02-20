@@ -24,12 +24,12 @@ window.onload = () =>
 function startGame()
 {
 	myGameArea = new GameArea("gameCanvas", 288,512 );
-	myGameArea.run(20);
+	myGameArea.run(10);
 }
 
 function moveUp()
 {
-	myGameArea.mainComponent.speedY = -5;
+	myGameArea.mainComponent.speedY = -4;
 }
 
 function stopMove() {

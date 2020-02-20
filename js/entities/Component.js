@@ -1,6 +1,6 @@
 class Component
 {
-	constructor(id, type, width, height, color, x, y, speedX, speedY, gravityBool, angle)
+	constructor(id, type, width, height, color, x, y, speedX, speedY, gravityBool, angle, cropBool)
 	{
 		this.type = type;
 		if (this.type === "image" || this.type === "base")
@@ -30,29 +30,36 @@ class Component
 		this.gravity = 0;
 		if(gravityBool)
 		{
-			this.gravity = 0.2;
+			this.gravity = 0.1;
 		}
 
-		this.angle = angle;
-		this.determineTopLeftRighBottom();
+		//Angle in radiant
+		this.angle = angle * Math.PI / 180;
+		this.cropBool = cropBool;
+		this.determineTopLeftRighBottomCenter();
 	}
 
-	determineTopLeftRighBottom()
+	determineTopLeftRighBottomCenter()
 	{
 		this.top = this.x + this.height;
 		this.left = this.x;
 		this.right = this.x + this.width;
 		this.top = this.y;
 		this.bottom = this.y + this.height;
+		this.centerX = this.left + this.width/2;
+		this.centerY = this.top + this.height/2;
 	}
 
 	move()
 	{
-		this.speedY += this.gravity;
+		if(this.speedY < 4)
+		{
+			this.speedY += this.gravity;
+		}
 
 		this.x += this.speedX;
 		this.y += this.speedY;
-		this.determineTopLeftRighBottom();
+		this.determineTopLeftRighBottomCenter();
 		if (this.type === "base")
 		{
 			if (this.x === -(this.width))
@@ -74,5 +81,10 @@ class Component
 			(this.top <= otherComp.bottom) &&
 			(this.right >= otherComp.left) &&
 			(this.left <= otherComp.right);
+	}
+
+	alignedWith(otherComp)
+	{
+		return this.centerX === otherComp.centerX
 	}
 }
