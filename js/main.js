@@ -29,7 +29,7 @@ function startGame()
 
 function moveUp()
 {
-	myGameArea.mainComponent.speedY = -4;
+	myGameArea.mainComponent.moveUp();
 }
 
 function stopMove() {

@@ -24,11 +24,6 @@ class GameArea
 
 
 		//Components
-		const scoreComponent = new Component("score", "text", "30px", "Consolas", "black", 280, 40, 0, 0, false, 0, false);
-		this.addComponent(scoreComponent);
-		this.selectScoreComponent(scoreComponent);
-
-
 		const backgroundComponent = new Component("background", "image", this.canvas.width, this.canvas.height, "./assets/sprites/background-day.png", 0, 0, 0, 0, false, 0, false);
 		this.addComponent(backgroundComponent);
 
@@ -38,6 +33,10 @@ class GameArea
 		const mainComponent = new Component("bird", "image", 34, 24, "./assets/sprites/yellowbird-midflap.png", 75, 120, 0, 0, true, 0, false);
 		this.addComponent(mainComponent);
 		this.selectMainComponent(mainComponent);
+
+		const scoreComponent = new Component("score", "text", "30px", "Consolas", "black", 10, 40, 0, 0, false, 0, false);
+		this.addComponent(scoreComponent);
+		this.selectScoreComponent(scoreComponent);
 
 		//Sounds
 		this.soundHit = new Sound("./assets/audio/hit.wav");
@@ -57,10 +56,14 @@ class GameArea
 
 	addComponent(comp, isObstacle, isPipeTop, isPipeBottom)
 	{
-		this.components.push(comp);
-		if(isObstacle)
+		if(isObstacle && (isPipeTop || isPipeBottom))
 		{
 			this.myObstacles.push(comp);
+			this.components.splice(this.components.length - 2, 0, comp);
+		}
+		else
+		{
+			this.components.push(comp);
 		}
 		if(isPipeTop)
 		{
@@ -96,10 +99,10 @@ class GameArea
 		if(comp.angle !== 0)
 		{
 			this.context.save();
-			this.context.translate(compX, compY);
+			this.context.translate(comp.centerX, comp.centerY);
 			this.context.rotate(comp.angle);
-			compX = - comp.width / 2;
-			compY = - comp.height / 2;
+			//compX = - comp.width / 2;
+			//compY = - comp.height / 2;
 		}
 
 		if (comp.type === "text")

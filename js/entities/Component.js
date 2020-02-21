@@ -37,6 +37,9 @@ class Component
 		this.angle = angle * Math.PI / 180;
 		this.cropBool = cropBool;
 		this.determineTopLeftRighBottomCenter();
+
+		//Sounds
+		this.soundWing = new Sound("./assets/audio/wing.wav");
 	}
 
 	determineTopLeftRighBottomCenter()
@@ -48,6 +51,12 @@ class Component
 		this.bottom = this.y + this.height;
 		this.centerX = this.left + this.width/2;
 		this.centerY = this.top + this.height/2;
+	}
+
+	moveUp()
+	{
+		this.speedY = -4;
+		this.soundWing.play();
 	}
 
 	move()
